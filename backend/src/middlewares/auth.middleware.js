@@ -1,19 +1,19 @@
 const httpErrors = require("http-errors");
-// @ schemas
+// * @ schemas
 const userModel = require("@schema/users/user.model");
 
-// @ utils
+// * @ utils
 const { verifyAccessToken } = require("@utils/jwt.token");
 const errorHandling = require("@utils/errorHandling");
 
-// @ config
+// * @ config
 const {
   DEVELOPMENT_ACCESS_USER_TOKEN,
   DEVELOPMENT_MODE,
 } = require("@config/index.config");
 const logger = require("@config/logger.config");
 
-// @ constants
+// * @ constants
 const {
   AUTHORIZATION_REQUIRED,
   AUTHENTICATION_TOKEN_REQUIRED,

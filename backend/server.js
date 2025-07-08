@@ -4,7 +4,7 @@ const app = require("./app");
 
 const { initializeSocketServer } = require("./socket.io");
 
-// @ config
+// * @ config
 const logger = require("@config/logger.config");
 const { SERVER_PORT, DEVELOPMENT_MODE } = require("@config/index.config");
 

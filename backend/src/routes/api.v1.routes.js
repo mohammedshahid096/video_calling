@@ -1,6 +1,6 @@
 const express = require("express");
 
-// @ config
+// * @ config
 const UserRoutes = require("./users/user.routes");
 const AuthUserRoutes = require("./users/auth.routes");
 

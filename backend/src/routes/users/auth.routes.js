@@ -1,12 +1,12 @@
 const express = require("express");
 
-// ? validators
+// * @ validators
 const {
   loginUserValidation,
   registerUserValidation,
 } = require("@validators/users/user.joi");
 
-// @ controllers
+// * @ controllers
 const {
   loginUserController,
   registerUserController,

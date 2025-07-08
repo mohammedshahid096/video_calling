@@ -1,18 +1,18 @@
 const httpErrors = require("http-errors");
 
-// @ schemas
+// * @ schemas
 const userModel = require("@schema/users/user.model");
 
-// @ config
+// * @ config
 const logger = require("@config/logger.config");
 
-// @ utils
+// * @ utils
 const { verifyPasswordMethod } = require("@utils/verify.password");
 const { createAccessToken } = require("@utils/jwt.token");
 const { responseJsonHandler } = require("@utils/responseHandling");
 const errorHandling = require("@utils/errorHandling");
 
-// @ constants
+// * @ constants
 const USER_CONSTANTS = require("@constants/user.constants");
 
 const loginUserController = async (req, res, next) => {
