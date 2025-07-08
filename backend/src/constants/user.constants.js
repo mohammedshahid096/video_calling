@@ -5,6 +5,7 @@ module.exports = {
   SUCCESSFULLY_USER_DETAILS_UPDATED: "Successfully user details  updated",
   SUCCESSFULLY_USER_LOGOUT: "Successfully user is Logout",
   USER_PROFILE_FETCHED: "User profile fetched successfully",
+  USERS_FETCHED: "Users fetched successfully",
 
   // error constants
   USER_ALREADY_EXISTS: "User already exists",

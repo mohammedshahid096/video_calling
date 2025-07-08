@@ -39,7 +39,6 @@ module.exports.Authentication = async (req, res, next) => {
     }
 
     let userExist = null;
-    console.log(decode);
 
     userExist = await userModel.findById(decode.id).lean();
 

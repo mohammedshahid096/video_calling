@@ -39,6 +39,41 @@ const myProfileController = async (req, res, next) => {
   }
 };
 
+const getAllUsersController = async (req, res, next) => {
+  try {
+    logger.info(
+      "controller - users - user.controller - getAllUsersController - start"
+    );
+
+    let query = {
+      _id: { $ne: req.user._id },
+    };
+
+    const users = await userModel.find(
+      query,
+      "email userName name profileImage"
+    );
+
+    logger.info(
+      "controller - users - user.controller - getAllUsersController - End"
+    );
+    responseJsonHandler(
+      {
+        message: USER_CONSTANTS.USERS_FETCHED,
+        data: users,
+      },
+      res
+    );
+  } catch (error) {
+    logger.error(
+      "controller - users - user.controller - getAllUsersController - End",
+      error
+    );
+    return errorHandling(error, res);
+  }
+};
+
 module.exports = {
   myProfileController,
+  getAllUsersController,
 };

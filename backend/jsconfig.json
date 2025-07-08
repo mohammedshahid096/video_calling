@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".", // This is crucial. It tells VS Code the base for your paths.
+    "paths": {
+      "@/*": ["./src/*"],
+      "@root/*": ["./*"],
+      "@schema/*": ["./src/schema/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@models/*": ["./src/models/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@config/*": ["./src/config/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@validators/*": ["./src/validators/*"],
+      "helpers/*": ["./src/helpers/*"]
+    }
+  },
+  "exclude": ["node_modules", "**/node_modules/*", "dist", "build"] // Optional: Exclude build/node_modules for better
+}
