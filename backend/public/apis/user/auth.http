@@ -1,0 +1,23 @@
+@API_BASE_URL_LOCAL = http://localhost:8000/api/v1
+
+### Register a new user
+POST {{API_BASE_URL_LOCAL}}/auth/register
+Content-Type: application/json
+
+{
+    "name": "test1",
+    "email": "test1@example.com",
+    "userName": "testuser",
+    "password" :"Test@123",
+    "gender" :"male"
+}
+
+### login a  user
+POST {{API_BASE_URL_LOCAL}}/auth/login
+Content-Type: application/json
+
+{
+    "userName": "test1@example.com",
+    "password" :"Test@123"
+}
+
