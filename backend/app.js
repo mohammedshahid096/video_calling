@@ -2,6 +2,7 @@ const express = require("express");
 const compression = require("compression");
 let moment = require("moment-timezone");
 
+// @ config
 const MongoDataBaseConn = require("@config/db.config");
 const { DEVELOPMENT_MODE } = require("@config/index.config");
 const ratelimitConfig = require("@config/ratelimit.config");
@@ -10,6 +11,7 @@ const morganConfigFunction = require("@config/morgan.config");
 const helmetConfig = require("@config/helmet.config");
 const { runCronSchedulerFunction } = require("@config/cron.config");
 
+// ? routes
 const IndexRoutes = require("@routes/index.route");
 const errorHandling = require("@utils/errorHandling");
 

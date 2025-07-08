@@ -1,9 +1,17 @@
 const httpErrors = require("http-errors");
-const USER_CONSTANTS = require("../../constants/user.constants");
-const logger = require("../../config/logger.config");
-const errorHandling = require("../../utils/errorHandling");
-const userModel = require("../../schema/users/user.model");
-const { responseJsonHandler } = require("../../utils/responseHandling");
+
+// @ schemas
+const userModel = require("@schema/users/user.model");
+
+// @ config
+const logger = require("@config/logger.config");
+
+// @ utils
+const { responseJsonHandler } = require("@utils/responseHandling");
+const errorHandling = require("@utils/errorHandling");
+
+// @ constants
+const USER_CONSTANTS = require("@constants/user.constants");
 
 const myProfileController = async (req, res, next) => {
   try {

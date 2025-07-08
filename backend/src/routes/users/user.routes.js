@@ -1,9 +1,13 @@
 const express = require("express");
-const { myProfileController } = require("@/controllers/users/user.controller");
+
+// @ middlewares
 const {
   Authentication,
   setHeaderDevelopment,
 } = require("@middlewares/auth.middleware");
+
+// @ controllers
+const { myProfileController } = require("@/controllers/users/user.controller");
 
 const UserRoutes = express.Router();
 

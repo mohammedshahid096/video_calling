@@ -1,10 +1,12 @@
 require("module-alias/register");
 const { createServer } = require("http");
 const app = require("./app");
+
+const { initializeSocketServer } = require("./socket.io");
+
+// @ config
 const logger = require("@config/logger.config");
 const { SERVER_PORT, DEVELOPMENT_MODE } = require("@config/index.config");
-const { initializeSocketServer } = require("./socket.io");
-// app.js or server.js
 
 function startServer() {
   const httpServer = createServer(app);

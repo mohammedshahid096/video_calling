@@ -1,12 +1,16 @@
 const express = require("express");
-const {
-  loginUserController,
-  registerUserController,
-} = require("@controllers/users/auth.controller");
+
+// ? validators
 const {
   loginUserValidation,
   registerUserValidation,
 } = require("@validators/users/user.joi");
+
+// @ controllers
+const {
+  loginUserController,
+  registerUserController,
+} = require("@controllers/users/auth.controller");
 
 const AuthUserRoutes = express.Router();
 
