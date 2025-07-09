@@ -7,6 +7,7 @@ import Service from '@/services';
 
 export const initialState = {
   profileDetails: null,
+  allUsersList: null,
 };
 
 export const AuthState = () => {
@@ -33,6 +34,16 @@ export const AuthState = () => {
     return response;
   };
 
+  const getAllUsersAction = async () => {
+    const url = `${userBase}${endpoints.allUsers}`;
+    const token = getAccessToken();
+    const response = await Service.fetchGet(url, token);
+    if (response[0] === true) {
+      dispatch({ type: Actions.ALL_USERS_STATE, payload: response[1]?.data });
+    }
+    return response;
+  };
+
   const updateAuthStateAction = (payload) => {
     dispatch({ type: Actions.UPDATE_AUTH_STATE, payload });
   };
@@ -45,6 +56,7 @@ export const AuthState = () => {
     ...state,
     loginUserAction,
     getUserProfileAction,
+    getAllUsersAction,
     updateAuthStateAction,
     resetChatAgentAction,
   };

@@ -3,6 +3,7 @@ export const endpoints = {
   register: '/register',
   profile: '/profile',
   logout: '/logout',
+  allUsers: '/users-list',
 };
 export const authBase = '/auth';
 export const userBase = '/user';

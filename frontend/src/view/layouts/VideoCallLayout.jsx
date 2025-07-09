@@ -1,5 +1,7 @@
+import { memo, useEffect, useCallback, useContext } from 'react';
 import { Card } from '@/components/ui/card';
-import { UsersList } from '../components/UsersList';
+import UsersList from '../components/UsersList';
+import Context from '@/context/context';
 
 const users = [
   {
@@ -32,10 +34,20 @@ const users = [
   // Add more users as needed
 ];
 
-export default function VideoCallLayout() {
+const VideoCallLayout = () => {
+  const {
+    authState: { getAllUsersAction, allUsersList },
+  } = useContext(Context);
+
+  useEffect(() => {
+    if (!allUsersList) {
+      getAllUsersAction();
+    }
+  }, []);
+
   return (
     <div className="flex gap-3 h-screen w-full">
-      <UsersList users={users} />
+      <UsersList users={allUsersList} />
 
       {/* Right Panel - Empty for now */}
       <Card className="flex-1 border-none flex items-center justify-center">
@@ -66,4 +78,6 @@ export default function VideoCallLayout() {
       </Card>
     </div>
   );
-}
+};
+
+export default memo(VideoCallLayout);

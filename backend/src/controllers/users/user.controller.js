@@ -51,7 +51,7 @@ const getAllUsersController = async (req, res, next) => {
 
     const users = await userModel.find(
       query,
-      "email userName name profileImage"
+      "name email userName name profilePhoto"
     );
 
     logger.info(

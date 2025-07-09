@@ -5,6 +5,10 @@ const actionHandlers = {
     ...state,
     profileDetails: action.payload,
   }),
+  ALL_USERS_STATE: (state, action) => ({
+    ...state,
+    allUsersList: action.payload,
+  }),
   UPDATE_AUTH_STATE: (state, action) => ({
     ...state,
     ...action.payload,
