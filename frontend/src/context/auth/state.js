@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { Actions } from './action';
-import { authBase, endpoints } from './constants';
+import { authBase, userBase, endpoints } from './constants';
 import Reducer from './reducer';
 import { setAccessToken, getAccessToken } from '@/helpers/local-storage';
 import Service from '@/services';
@@ -16,9 +16,19 @@ export const AuthState = () => {
     const url = `${authBase}${endpoints.login}`;
     const response = await Service.fetchPost(url, json);
     if (response[0] === true) {
-      const [token, data] = response?.[1]?.['data'];
-      setAccessToken(token);
+      const { accessToken, data } = response?.[1];
+      setAccessToken(accessToken);
       dispatch({ type: Actions.USER_PROFILE_STATE, payload: data });
+    }
+    return response;
+  };
+
+  const getUserProfileAction = async () => {
+    const url = `${userBase}${endpoints.profile}`;
+    const token = getAccessToken();
+    const response = await Service.fetchGet(url, token);
+    if (response[0] === true) {
+      dispatch({ type: Actions.USER_PROFILE_STATE, payload: response[1]?.data });
     }
     return response;
   };
@@ -34,6 +44,7 @@ export const AuthState = () => {
   return {
     ...state,
     loginUserAction,
+    getUserProfileAction,
     updateAuthStateAction,
     resetChatAgentAction,
   };

@@ -1,6 +1,16 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import allRoutesMapper from './routes';
+import { Toaster } from 'react-hot-toast';
+
+const OtherComponents = () => {
+  const mode = import.meta.env.VITE_DEVELOPMENT_MODE || 'development';
+  return (
+    <>
+      <Toaster />
+    </>
+  );
+};
 
 function App() {
   return (
@@ -16,6 +26,8 @@ function App() {
           ))}
         </Routes>
       </BrowserRouter>
+
+      <OtherComponents />
     </div>
   );
 }
