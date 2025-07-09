@@ -1,0 +1,40 @@
+import { useReducer } from 'react';
+import { Actions } from './action';
+import { authBase, endpoints } from './constants';
+import Reducer from './reducer';
+import { setAccessToken, getAccessToken } from '@/helpers/local-storage';
+import Service from '@/services';
+
+export const initialState = {
+  profileDetails: null,
+};
+
+export const AuthState = () => {
+  const [state, dispatch] = useReducer(Reducer, initialState);
+
+  const loginUserAction = async (json) => {
+    const url = `${authBase}${endpoints.login}`;
+    const response = await Service.fetchPost(url, json);
+    if (response[0] === true) {
+      const [token, data] = response?.[1]?.['data'];
+      setAccessToken(token);
+      dispatch({ type: Actions.USER_PROFILE_STATE, payload: data });
+    }
+    return response;
+  };
+
+  const updateAuthStateAction = (payload) => {
+    dispatch({ type: Actions.UPDATE_AUTH_STATE, payload });
+  };
+
+  const resetChatAgentAction = () => {
+    dispatch({ type: Actions.RESET_STATE });
+  };
+
+  return {
+    ...state,
+    loginUserAction,
+    updateAuthStateAction,
+    resetChatAgentAction,
+  };
+};

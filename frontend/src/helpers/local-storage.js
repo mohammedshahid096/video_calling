@@ -1,4 +1,4 @@
-const ACCESS_TOKEN_KEY = 'usertoken_tuition';
+const ACCESS_TOKEN_KEY = 'usertoken_video_calling';
 
 export const getAccessToken = () => {
   return localStorage.getItem(ACCESS_TOKEN_KEY);

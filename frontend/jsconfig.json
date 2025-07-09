@@ -1,18 +1,18 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./jsconfig.app.json"
-    }
-    // {
-    //   "path": "./tsconfig.node.json"
-    // }
-  ],
+  "references": [],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@shadcn/*": ["./src/components/ui/*"]
+      "@shadcn/*": ["./src/components/ui/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@context/*": ["./src/context/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@services/*": ["./src/services/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@config/*": ["./src/config/*"],
+      "@api/*": ["./src/api/*"]
     }
   }
 }
