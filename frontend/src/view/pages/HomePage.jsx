@@ -1,7 +1,8 @@
 import React from 'react';
+import VideoCallLayout from '../layouts/VideoCallLayout';
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return <VideoCallLayout>hello</VideoCallLayout>;
 };
 
 export default HomePage;
