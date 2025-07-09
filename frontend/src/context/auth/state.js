@@ -24,6 +24,12 @@ export const AuthState = () => {
     return response;
   };
 
+  const registerUserAction = async (json) => {
+    const url = `${authBase}${endpoints.register}`;
+    const response = await Service.fetchPost(url, json);
+    return response;
+  };
+
   const getUserProfileAction = async () => {
     const url = `${userBase}${endpoints.profile}`;
     const token = getAccessToken();
@@ -55,6 +61,7 @@ export const AuthState = () => {
   return {
     ...state,
     loginUserAction,
+    registerUserAction,
     getUserProfileAction,
     getAllUsersAction,
     updateAuthStateAction,

@@ -3,37 +3,6 @@ import { Card } from '@/components/ui/card';
 import UsersList from '../components/UsersList';
 import Context from '@/context/context';
 
-const users = [
-  {
-    _id: '686d0086bda3d2d81b90c505',
-    name: 'John Doe D',
-    userName: 'johndoe',
-    email: 'john@example.com',
-    profilePhoto: null,
-    isOnline: true,
-    lastSeen: '2m ago',
-  },
-  {
-    _id: '686d0086bda3d2d81b90c506',
-    name: 'Jane Smith',
-    userName: 'janesmith',
-    email: 'jane@example.com',
-    profilePhoto: null,
-    isOnline: false,
-    lastSeen: '2h ago',
-  },
-  {
-    _id: '686d0086bda3d2d81b90c507',
-    name: 'Alex Johnson',
-    userName: 'alexj',
-    email: 'alex@example.com',
-    profilePhoto: null,
-    isOnline: true,
-    lastSeen: 'Online',
-  },
-  // Add more users as needed
-];
-
 const VideoCallLayout = () => {
   const {
     authState: { getAllUsersAction, allUsersList },

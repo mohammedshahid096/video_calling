@@ -5,11 +5,11 @@ POST {{API_BASE_URL_LOCAL}}/auth/register
 Content-Type: application/json
 
 {
-    "name": "test2",
-    "email": "test2@example.com",
-    "userName": "testuser2",
+    "name": "test3",
+    "email": "test3@example.com",
+    "userName": "testuser3",
     "password" :"Test@123",
-    "gender" :"male"
+    "gender" :"female"
 }
 
 ### login a  user
