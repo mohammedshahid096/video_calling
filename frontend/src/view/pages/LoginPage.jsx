@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { Eye, EyeOff } from 'lucide-react';
 import Context from '@/context/context';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const initialValues = {
   email: '',
@@ -168,9 +168,9 @@ const LoginPage = () => {
 
         <p className="text-center text-sm text-gray-600 mt-6">
           Don't have an account?{' '}
-          <a href="/register" className="text-blue-600 hover:underline">
+          <Link to="/register" className="text-blue-600 hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

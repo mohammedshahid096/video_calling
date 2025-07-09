@@ -12,11 +12,11 @@
     @apply  box-border;
   }
   .app {
-    @apply min-h-screen w-screen;
+    @apply h-screen min-h-screen w-full;
     font-family: "poppins", sans-serif;
   }
   .fullScreen {
-    @apply min-h-screen w-screen;
+    @apply min-h-screen w-full;
   }
 }
 

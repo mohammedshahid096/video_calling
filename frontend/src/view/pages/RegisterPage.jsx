@@ -8,7 +8,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Context from '@/context/context';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const initialValues = {
   name: '',
@@ -106,7 +106,7 @@ const RegisterPage = () => {
   );
 
   return (
-    <div className="fullScreen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="w-full bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden p-8">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
@@ -178,9 +178,8 @@ const RegisterPage = () => {
             )}
           </div>
 
-          <div className="grid gap-2">
+          <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
-
             <Input
               id="password"
               type={'text'}
@@ -248,10 +247,10 @@ const RegisterPage = () => {
         <Separator className="my-6" />
 
         <p className="text-center text-sm text-gray-600 mt-6">
-          Don't have an account?{' '}
-          <a href="/register" className="text-blue-600 hover:underline">
-            Sign up
-          </a>
+          Already register a account?{' '}
+          <Link to="/" className="text-blue-600 hover:underline">
+            Sing In
+          </Link>
         </p>
       </div>
     </div>
