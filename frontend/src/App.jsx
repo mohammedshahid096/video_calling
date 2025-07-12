@@ -4,6 +4,7 @@ import allRoutesMapper from './routes';
 import { Toaster } from 'react-hot-toast';
 
 const OtherComponents = () => {
+  // other components that need to be rendered globally
   const mode = import.meta.env.VITE_DEVELOPMENT_MODE || 'development';
   return (
     <>
