@@ -8,6 +8,10 @@ const ModelSchema = new mongoose.Schema(
       ref: user,
       required: true,
     },
+    socketId: {
+      type: String,
+      required: true,
+    },
     isOnline: {
       type: Boolean,
       default: true,

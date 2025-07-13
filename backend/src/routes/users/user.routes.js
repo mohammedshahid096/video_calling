@@ -10,15 +10,16 @@ const {
 const {
   myProfileController,
   getAllUsersController,
+  getAllActiveOnlineUsersController,
 } = require("@/controllers/users/user.controller");
 
 const UserRoutes = express.Router();
 
 UserRoutes.route("/profile").get(Authentication, myProfileController);
-UserRoutes.route("/users-list").get(
-  setHeaderDevelopment,
+UserRoutes.route("/users-list").get(Authentication, getAllUsersController);
+UserRoutes.route("/online-list").get(
   Authentication,
-  getAllUsersController
+  getAllActiveOnlineUsersController
 );
 
 module.exports = UserRoutes;

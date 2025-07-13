@@ -1,22 +1,30 @@
-import { memo, useEffect, useCallback, useContext } from 'react';
+import { memo, useEffect, useCallback, useContext, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
 import UsersList from '../components/UsersList';
 import Context from '@/context/context';
 
 const VideoCallLayout = () => {
   const {
-    authState: { getAllUsersAction, allUsersList },
+    authState: { getAllUsersAction, allUsersList, getAllOnlineUserListAction, onlineUsersList },
   } = useContext(Context);
+
+  const onelineUsersObjects = useMemo(() => {
+    return onlineUsersList?.reduce((acc, user) => {
+      acc[user._id] = user;
+      return acc;
+    }, {});
+  }, [onlineUsersList]);
 
   useEffect(() => {
     if (!allUsersList) {
       getAllUsersAction();
+      getAllOnlineUserListAction();
     }
   }, []);
 
   return (
     <div className="flex gap-3 h-screen w-full">
-      <UsersList users={allUsersList} />
+      <UsersList users={allUsersList} onelineUsersObjects={onelineUsersObjects} />
 
       {/* Right Panel - Empty for now */}
       <Card className="flex-1 border-none flex items-center justify-center">

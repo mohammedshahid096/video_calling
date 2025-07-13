@@ -12,6 +12,7 @@ const errorHandling = require("@utils/errorHandling");
 
 // * @ constants
 const USER_CONSTANTS = require("@constants/user.constants");
+const activeUsersModel = require("@/schema/users/activeUsers.model");
 
 const myProfileController = async (req, res, next) => {
   try {
@@ -73,7 +74,40 @@ const getAllUsersController = async (req, res, next) => {
   }
 };
 
+const getAllActiveOnlineUsersController = async (req, res, next) => {
+  try {
+    logger.info(
+      "controller - users - user.controller - getAllActiveOnlineUsersController - start"
+    );
+
+    let query = {
+      // _id: { $ne: req.user._id },
+      isOnline: true,
+    };
+
+    const users = await activeUsersModel.find(query);
+
+    logger.info(
+      "controller - users - user.controller - getAllActiveOnlineUsersController - End"
+    );
+    responseJsonHandler(
+      {
+        message: USER_CONSTANTS.ACTIVE_USERS_FETCHED,
+        data: users,
+      },
+      res
+    );
+  } catch (error) {
+    logger.error(
+      "controller - users - user.controller - getAllActiveOnlineUsersController - End",
+      error
+    );
+    return errorHandling(error, res);
+  }
+};
+
 module.exports = {
   myProfileController,
   getAllUsersController,
+  getAllActiveOnlineUsersController,
 };

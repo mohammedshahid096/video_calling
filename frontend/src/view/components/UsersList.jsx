@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo } from 'react';
+import React, { memo, useState, useMemo, useEffect, useCallback } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -7,9 +7,12 @@ import getInitials from '@/helpers/get-initials';
 import { cn } from '@/lib/utils';
 import { Search, MoreVertical } from 'lucide-react';
 import { CircleUserRound } from 'lucide-react'; // Adjust import if necessary
+import { useSocket } from '@/providers/SocketContext';
+import { user_reciever_listeners } from '@/constants/socket.constants';
 
-const UsersList = ({ users = [] }) => {
+const UsersList = ({ users = [], onelineUsersObjects = {} }) => {
   const [search, setSearch] = useState('');
+  const socket = useSocket();
   const filterUsers = useMemo(() => {
     if (search) {
       return users.filter(
@@ -21,6 +24,33 @@ const UsersList = ({ users = [] }) => {
       return users || [];
     }
   }, [search, users]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on(user_reciever_listeners.me, mySocketDetailsFunction);
+    socket.on(user_reciever_listeners.newUserJoined, newUserJoinedSocketFunction);
+
+    return () => {
+      socket?.off(user_reciever_listeners.me, mySocketDetailsFunction);
+      socket?.off(user_reciever_listeners.newUserJoined, newUserJoinedSocketFunction);
+    };
+  }, [socket]);
+
+  const mySocketDetailsFunction = useCallback(
+    (data) => {
+      console.log('Socket me event received:', data);
+    },
+    [socket]
+  );
+
+  const newUserJoinedSocketFunction = useCallback(
+    (data) => {
+      console.log('socket ', data);
+    },
+    [socket]
+  );
+
   return (
     <Card className="w-80 border-none h-full flex flex-col bg-gray-50">
       {/* Search Bar */}
@@ -64,7 +94,7 @@ const UsersList = ({ users = [] }) => {
                   <span
                     className={cn(
                       'absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-gray-900',
-                      user?.isOnline ? 'bg-green-500' : 'bg-red-500'
+                      onelineUsersObjects?.[user?._id]?.isOnline ? 'bg-green-500' : 'bg-red-500'
                     )}
                   />
                 </div>

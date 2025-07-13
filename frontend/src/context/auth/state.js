@@ -8,6 +8,7 @@ import Service from '@/services';
 export const initialState = {
   profileDetails: null,
   allUsersList: null,
+  onlineUsersList: null,
 };
 
 export const AuthState = () => {
@@ -50,6 +51,16 @@ export const AuthState = () => {
     return response;
   };
 
+  const getAllOnlineUserListAction = async () => {
+    const url = `${userBase}${endpoints.onlineUsers}`;
+    const token = getAccessToken();
+    const response = await Service.fetchGet(url, token);
+    if (response[0] === true) {
+      dispatch({ type: Actions.ONLINE_USERS_STATE, payload: response[1]?.data });
+    }
+    return response;
+  };
+
   const updateAuthStateAction = (payload) => {
     dispatch({ type: Actions.UPDATE_AUTH_STATE, payload });
   };
@@ -64,6 +75,7 @@ export const AuthState = () => {
     registerUserAction,
     getUserProfileAction,
     getAllUsersAction,
+    getAllOnlineUserListAction,
     updateAuthStateAction,
     resetChatAgentAction,
   };

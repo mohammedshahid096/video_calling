@@ -9,6 +9,10 @@ const actionHandlers = {
     ...state,
     allUsersList: action.payload,
   }),
+  ONLINE_USERS_STATE: (state, action) => ({
+    ...state,
+    onlineUsersList: action.payload,
+  }),
   UPDATE_AUTH_STATE: (state, action) => ({
     ...state,
     ...action.payload,

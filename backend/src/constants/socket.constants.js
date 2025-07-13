@@ -1,7 +1,13 @@
-const admin_emit_listeners = {
-  adminNotification: "adminNotification",
+const user_emit_listeners = {
+  joinRoom: "joinRoom",
+  me: "me",
+  newUserJoined: "newUserJoined",
+  userDisconnected: "userDisconnected",
 };
 
+const user_receive_listeners = {};
+
 module.exports = {
-  admin_emit_listeners,
+  user_emit_listeners,
+  user_receive_listeners,
 };

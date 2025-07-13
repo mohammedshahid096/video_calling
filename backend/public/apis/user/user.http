@@ -9,3 +9,7 @@ Authorization: Bearer {{API_TOKEN_LOCAL}}
 ### Get all users
 GET {{API_BASE_URL_LOCAL}}/user/users-list
 Authorization: Bearer {{API_TOKEN_LOCAL}}
+
+### Get all online users
+GET {{API_BASE_URL_LOCAL}}/user/online-list
+Authorization: Bearer {{API_TOKEN_LOCAL}}
