@@ -14,6 +14,7 @@ import Context from '@/context/context';
 const UsersList = ({ users = [], onelineUsersObjects = {} }) => {
   const {
     authState: { updateAuthStateAction, onlineUsersList },
+    sidebarState: { selectedUser, selectedUserAction },
   } = useContext(Context);
   const { socket, mySocketDetails, setMySocketDetails } = useSocket();
   const [search, setSearch] = useState('');
@@ -77,6 +78,13 @@ const UsersList = ({ users = [], onelineUsersObjects = {} }) => {
     [socket, onlineUsersList]
   );
 
+  const selectUserFunctionHandler = useCallback(
+    (details) => {
+      selectedUserAction(details);
+    },
+    [selectedUser]
+  );
+
   return (
     <Card className="w-80 border-none h-full flex flex-col bg-gray-50">
       {/* Search Bar */}
@@ -106,9 +114,11 @@ const UsersList = ({ users = [], onelineUsersObjects = {} }) => {
               <div
                 key={user?._id}
                 className={cn(
-                  'flex items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer',
-                  'transition-colors duration-150'
+                  'flex items-center p-3   cursor-pointer',
+                  'transition-colors duration-150',
+                  selectedUser?._id === user?._id ? 'bg-gray-300' : 'hover:bg-gray-100'
                 )}
+                onClick={() => selectUserFunctionHandler(user)}
               >
                 <div className="relative mr-3">
                   <Avatar className="h-12 w-12">

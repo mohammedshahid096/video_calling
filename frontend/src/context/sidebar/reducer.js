@@ -5,6 +5,10 @@ const actionHandlers = {
     ...state,
     isSidebarOpen: action.payload,
   }),
+  SELECTED_USER_STATE: (state, action) => ({
+    ...state,
+    selectedUser: action.payload,
+  }),
 
   UPDATE_SIDEBAR_STATE: (state, action) => ({
     ...state,
