@@ -8,7 +8,7 @@ import CallUserComponent from './CallUserComponent';
 import VideoStream from './VideoStream';
 import Peer from 'simple-peer';
 import { useSocket } from '@/providers/SocketContext';
-import { user_emit_listeners } from '@/constants/socket.constants';
+import { user_emit_listeners, user_reciever_listeners } from '@/constants/socket.constants';
 
 const VideoCallLayout = () => {
   const {
@@ -19,7 +19,15 @@ const VideoCallLayout = () => {
       onlineUsersList,
       profileDetails,
     },
-    sidebarState: { selectedUser, isSidebarOpen },
+    sidebarState: {
+      selectedUser,
+      isSidebarOpen,
+      reciveingCall,
+      callerDetails,
+      streamAction,
+      reciveingCallAction,
+      callerDetailsAction,
+    },
   } = useContext(Context);
 
   const myVideoRef = useRef();
@@ -38,6 +46,12 @@ const VideoCallLayout = () => {
       getAllUsersAction();
       getAllOnlineUserListAction();
     }
+
+    socket?.on(user_reciever_listeners.callToUser, callRecievingFunctionHandler);
+
+    return () => {
+      socket?.off(user_reciever_listeners.callToUser, callRecievingFunctionHandler);
+    };
   }, []);
 
   const startCallingFunctionHandler = useCallback(async () => {
@@ -84,6 +98,15 @@ const VideoCallLayout = () => {
       console.error('error', error);
     }
   }, [selectedUser, mySocketDetails, profileDetails]);
+
+  const callRecievingFunctionHandler = useCallback(
+    (data) => {
+      console.log('get callToUser data recieved', data);
+      reciveingCallAction(true);
+      callerDetailsAction(data);
+    },
+    [reciveingCall, callerDetails]
+  );
 
   return (
     <div className="flex gap-3 h-screen w-full">
