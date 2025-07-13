@@ -10,7 +10,7 @@ const VideoCallLayout = () => {
 
   const onelineUsersObjects = useMemo(() => {
     return onlineUsersList?.reduce((acc, user) => {
-      acc[user._id] = user;
+      acc[user?.user] = user;
       return acc;
     }, {});
   }, [onlineUsersList]);

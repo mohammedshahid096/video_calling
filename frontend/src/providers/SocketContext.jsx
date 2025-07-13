@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, createContext, memo, useContext } from 'react';
+import React, { useMemo, useEffect, createContext, memo, useContext, useState } from 'react';
 import { BASE_URL } from '@/services/config';
 import Context from '@/context/context';
 import { io } from 'socket.io-client';
@@ -9,6 +9,7 @@ export const SocketContext = createContext(null);
 export const useSocket = () => {
   return useContext(SocketContext);
 };
+
 const SocketProvider = ({ children }) => {
   const {
     authState: { profileDetails },
@@ -26,6 +27,8 @@ const SocketProvider = ({ children }) => {
       return null;
     }
   }, []);
+
+  const [mySocketDetails, setMySocketDetails] = useState(null);
 
   useEffect(() => {
     if (!profileDetails || !socket) return;
@@ -66,7 +69,11 @@ const SocketProvider = ({ children }) => {
     };
   }, [profileDetails, socket]);
 
-  return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
+  return (
+    <SocketContext.Provider value={{ socket, mySocketDetails, setMySocketDetails }}>
+      {children}
+    </SocketContext.Provider>
+  );
 };
 
 export default memo(SocketProvider);

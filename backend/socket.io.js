@@ -54,7 +54,7 @@ function initializeSocketServer(httpServer) {
           console.log(`User left: ${userLeft.user}`);
           socket.broadcast.emit(user_emit_listeners.userDisconnected, userLeft);
         }
-      }, 25000);
+      }, 10000);
     });
   });
   // return serverHttp;

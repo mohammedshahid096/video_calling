@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo, useEffect, useCallback } from 'react';
+import React, { memo, useState, useMemo, useEffect, useCallback, useContext } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,10 +9,15 @@ import { Search, MoreVertical } from 'lucide-react';
 import { CircleUserRound } from 'lucide-react'; // Adjust import if necessary
 import { useSocket } from '@/providers/SocketContext';
 import { user_reciever_listeners } from '@/constants/socket.constants';
+import Context from '@/context/context';
 
 const UsersList = ({ users = [], onelineUsersObjects = {} }) => {
+  const {
+    authState: { updateAuthStateAction, onlineUsersList },
+  } = useContext(Context);
+  const { socket, mySocketDetails, setMySocketDetails } = useSocket();
   const [search, setSearch] = useState('');
-  const socket = useSocket();
+
   const filterUsers = useMemo(() => {
     if (search) {
       return users.filter(
@@ -30,25 +35,46 @@ const UsersList = ({ users = [], onelineUsersObjects = {} }) => {
 
     socket.on(user_reciever_listeners.me, mySocketDetailsFunction);
     socket.on(user_reciever_listeners.newUserJoined, newUserJoinedSocketFunction);
+    socket.on(user_reciever_listeners.userDisconnected, userDisconnectedSocketFunction);
 
     return () => {
       socket?.off(user_reciever_listeners.me, mySocketDetailsFunction);
       socket?.off(user_reciever_listeners.newUserJoined, newUserJoinedSocketFunction);
+      socket?.off(user_reciever_listeners.userDisconnected, userDisconnectedSocketFunction);
+      setMySocketDetails(null);
     };
   }, [socket]);
 
   const mySocketDetailsFunction = useCallback(
     (data) => {
-      console.log('Socket me event received:', data);
+      console.log('My socket details:', data);
+      setMySocketDetails(data);
     },
-    [socket]
+    [socket, mySocketDetails]
   );
 
   const newUserJoinedSocketFunction = useCallback(
     (data) => {
-      console.log('socket ', data);
+      console.log('new user joined ', data);
+      let updatedOnlineUsersList = onlineUsersList?.find((user) => user._id === data._id)
+        ? onlineUsersList
+        : [...(onlineUsersList || []), data];
+      updateAuthStateAction({
+        onlineUsersList: updatedOnlineUsersList,
+      });
     },
-    [socket]
+    [socket, onlineUsersList]
+  );
+
+  const userDisconnectedSocketFunction = useCallback(
+    (data) => {
+      console.log('User disconnected or left:', data);
+      let updatedOnlineUsersList = onlineUsersList?.filter((user) => user._id !== data._id);
+      updateAuthStateAction({
+        onlineUsersList: updatedOnlineUsersList,
+      });
+    },
+    [socket, onlineUsersList]
   );
 
   return (
