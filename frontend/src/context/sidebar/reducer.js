@@ -10,6 +10,16 @@ const actionHandlers = {
     selectedUser: action.payload,
   }),
 
+  RECIEVING_CALL_STATE: (state, action) => ({
+    ...state,
+    reciveingCall: action.payload,
+  }),
+
+  CALLER_STATE: (state, action) => ({
+    ...state,
+    callerDetails: action.payload,
+  }),
+
   UPDATE_SIDEBAR_STATE: (state, action) => ({
     ...state,
     ...action.payload,

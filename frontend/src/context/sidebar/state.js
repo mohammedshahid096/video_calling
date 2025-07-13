@@ -5,6 +5,9 @@ import Reducer from './reducer';
 export const initialState = {
   isSidebarOpen: true,
   selectedUser: null,
+  stream: null,
+  reciveingCall: false,
+  callerDetails: null,
 };
 
 export const SidebarState = () => {

@@ -6,4 +6,5 @@ export const user_reciever_listeners = {
 
 export const user_emit_listeners = {
   joinRoom: 'joinRoom',
+  callToUser: 'callToUser',
 };
