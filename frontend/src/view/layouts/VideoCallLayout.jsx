@@ -4,6 +4,7 @@ import UsersList from '../components/UsersList';
 import Context from '@/context/context';
 import Header from '../components/Header';
 import EmptyCall from '../components/EmptyCall';
+import CallUserComponent from './CallUserComponent';
 
 const VideoCallLayout = () => {
   const {
@@ -34,7 +35,9 @@ const VideoCallLayout = () => {
           <Header />
         </Card>
         <Card className="flex-1 border-none flex items-center justify-center">
-          <EmptyCall />
+          {selectedUser && <CallUserComponent user={selectedUser} />}
+
+          {!selectedUser && <EmptyCall />}
         </Card>
       </div>
     </div>
